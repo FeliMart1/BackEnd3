@@ -1,18 +1,21 @@
-# Imagen base de Node.js
-FROM node:18
+# Dockerfile
+FROM node:18-alpine
 
-# Crear directorio de trabajo
-WORKDIR /app
+# Directorio de trabajo
+WORKDIR /usr/src/app
 
-# Copiar los archivos del proyecto al contenedor
+# Copiar package.json + lockfile e instalar solo deps de producción
 COPY package*.json ./
+RUN npm ci --omit=dev
+
+# Copiar todo el código
 COPY . .
 
-# Instalar dependencias
-RUN npm install
+# Definir entorno
+ENV NODE_ENV=production
 
 # Exponer el puerto
 EXPOSE 3000
 
-# Comando por defecto
-CMD ["npm", "run", "dev"]
+# Comando por defecto: lanzar src/app.js
+CMD ["node", "src/app.js"]

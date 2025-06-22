@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:6.0
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - 27017:27017
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      # Conexión a MongoDB apuntando al servicio "mongo"
+      - MONGO_URI=mongodb://mongo:27017/mocksDB
+      # Se recomienda definir tu secreto en un .env local
+      - JWT_SECRET=${JWT_SECRET}
+      - PORT=3000
+      - CORS_ORIGIN=*
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
