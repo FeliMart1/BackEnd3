@@ -1,4 +1,3 @@
-// jest.setup.cjs
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const mongoose = require('mongoose');
 

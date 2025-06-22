@@ -1,4 +1,3 @@
-// src/tests/users.test.js
 import request from 'supertest';
 import jwt from 'jsonwebtoken';
 import app from '../app.js';
@@ -11,22 +10,18 @@ describe('Users API', () => {
   let userId;
 
   beforeAll(async () => {
-    // Creamos un usuario de prueba directamente en la BD
     const user = await User.create({
       first_name: 'Juan',
       last_name:  'Perez',
       email:      'juan.perez@example.com',
-      password:   'hashedpassword', // el hash real no importa aquí
-      // role: 'user' por defecto
+      password:   'hashedpassword', 
     });
     userId = user._id.toString();
 
-    // Generamos un JWT válido para este user
     token = jwt.sign({ sub: userId }, JWT_SECRET, { expiresIn: '2h' });
   });
 
   afterAll(async () => {
-    // Limpieza final de la colección de usuarios
     await User.deleteMany({});
   });
 
@@ -42,7 +37,6 @@ describe('Users API', () => {
       first_name: 'Juan',
       last_name:  'Perez',
     });
-    // Aseguramos que no venga la contraseña
     expect(res.body).not.toHaveProperty('password');
   });
 
@@ -65,10 +59,8 @@ describe('Users API', () => {
       .get('/api/users')
       .set('Authorization', `Bearer ${token}`);
 
-    // Actualmente solo requiere auth, devuelve array
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
-    // Debe contener al menos nuestro usuario
     const emails = res.body.map(u => u.email);
     expect(emails).toContain('juan.perez@example.com');
   });
@@ -80,7 +72,6 @@ describe('Users API', () => {
 
     expect(res.statusCode).toBe(204);
 
-    // Verificamos que el usuario ya no existe
     const found = await User.findById(userId);
     expect(found).toBeNull();
   });

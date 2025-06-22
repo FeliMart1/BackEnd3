@@ -1,4 +1,3 @@
-// src/tests/pets.test.js
 import request from 'supertest';
 import jwt from 'jsonwebtoken';
 import app from '../app.js';
@@ -11,7 +10,6 @@ describe('Pets API', () => {
   let userToken, adminToken, petId;
 
   beforeAll(async () => {
-    // Crear un usuario normal
     const user = await User.create({
       first_name: 'Normal',
       last_name:  'User',
@@ -21,7 +19,6 @@ describe('Pets API', () => {
     });
     userToken = jwt.sign({ sub: user._id.toString() }, JWT_SECRET, { expiresIn: '2h' });
 
-    // Crear un usuario admin
     const admin = await User.create({
       first_name: 'Admin',
       last_name:  'User',
@@ -52,7 +49,6 @@ describe('Pets API', () => {
   });
 
   test('POST /api/pets con token de user (no admin) → 403', async () => {
-    // Si aún no has implementado isAdmin en pets, puede devolver 401 o 403
     const res = await request(app)
       .post('/api/pets')
       .set('Authorization', `Bearer ${userToken}`)

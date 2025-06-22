@@ -34,8 +34,8 @@ Este proyecto proporciona:
 ## Instalación local
 
 ```bash
-git clone https://github.com/FeliMart1/BackEnd3
+git clone https://github.com/tu-usuario/backend3-mocking-project.git
 cd backend3-mocking-project
 npm install
 cp .env.example .env        
-npm run dev                
+npm run dev                 

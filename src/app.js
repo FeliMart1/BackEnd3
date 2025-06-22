@@ -1,4 +1,3 @@
-// src/app.js
 import express from 'express';
 import dotenv from 'dotenv';
 import logger from './config/logger.js';
@@ -14,26 +13,21 @@ dotenv.config();
 
 const app = express();
 
-// Parse JSON bodies
 app.use(express.json());
 
-// HTTP request logging
 app.use((req, res, next) => {
   logger.http(`${req.method} ${req.url}`);
   next();
 });
 
-// Serve Swagger UI at /docs
 app.use('/docs', swaggerUiServe, swaggerUiSetup(swaggerSpec));
 
-// Mount API routers
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/pets', petsRouter);
 app.use('/api/adoptions', adoptionRouter);
 app.use('/api/mocks', mocksRouter);
 
-// Global error handler
 app.use(errorHandler);
 
 export default app;

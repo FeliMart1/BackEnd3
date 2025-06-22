@@ -1,8 +1,5 @@
-// src/tests/adoption.test.js
 import request from 'supertest';
 import jwt from 'jsonwebtoken';
-
-// IMPORTS RELATIVOS DESDE src/tests → sube un nivel a src/
 import app from '../app.js';
 import User from '../models/User.js';
 import Pet from '../models/Pet.js';
@@ -14,17 +11,15 @@ describe('Adoption API', () => {
   let token, userId, petId, requestId;
 
   beforeAll(async () => {
-    // Crear usuario de prueba
     const user = await User.create({
       first_name: 'Test',
       last_name:  'User',
       email:      'test@example.com',
-      password:   'hashedpassword', // no importa el hash
+      password:   'hashedpassword', 
     });
     userId = user._id.toString();
     token = jwt.sign({ sub: userId }, JWT_SECRET, { expiresIn: '2h' });
 
-    // Crear mascota disponible
     const pet = await Pet.create({
       name:    'Firulais',
       species: 'dog',
@@ -73,7 +68,6 @@ describe('Adoption API', () => {
 
     expect(res.statusCode).toBe(204);
 
-    // Verificar en BD
     const again = await AdoptionRequest.findById(requestId);
     expect(again).toBeNull();
   });

@@ -1,4 +1,3 @@
-// src/routes/mocks.router.js
 import express from 'express';
 import { generateMockUsers } from '../mocks/mockUsers.js';
 import { generateMockProducts } from '../mocks/mockProducts.js';

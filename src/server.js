@@ -1,4 +1,3 @@
-// src/server.js
 import dotenv from 'dotenv';
 import logger from './config/logger.js';
 import { connectDB } from './db/connection.js';

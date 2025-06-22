@@ -1,4 +1,3 @@
-// src/routes/users.router.js
 import express from 'express';
 import User from '../models/User.js';
 import { auth } from '../middlewares/auth.js';

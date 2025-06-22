@@ -1,4 +1,3 @@
-// src/routes/auth.router.js
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -38,7 +37,6 @@ const SALT_ROUNDS = 10;
  *         description: Error de validación
  */
 router.post('/signup', async (req, res, next) => {
-  // Validación de entrada
   const { error } = signupSchema.validate(req.body);
   if (error) {
     logger.info('Validación fallida en signup', error);
@@ -95,7 +93,6 @@ router.post('/signup', async (req, res, next) => {
  *         description: Credenciales inválidas
  */
 router.post('/login', async (req, res, next) => {
-  // Validación de entrada
   const { error } = loginSchema.validate(req.body);
   if (error) {
     logger.info('Validación fallida en login', error);

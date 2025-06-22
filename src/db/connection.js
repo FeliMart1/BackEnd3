@@ -1,4 +1,3 @@
-// db/connection.js
 import mongoose from 'mongoose';
 import logger from '../config/logger.js';
 

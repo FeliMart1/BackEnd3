@@ -1,4 +1,3 @@
-// src/routes/adoption.router.js
 import express from 'express';
 import AdoptionRequest from '../models/AdoptionRequest.js';
 import Pet from '../models/Pet.js';

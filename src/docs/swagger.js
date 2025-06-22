@@ -1,4 +1,3 @@
-// src/docs/swagger.js
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
@@ -24,7 +23,6 @@ const swaggerDefinition = {
       },
     },
     schemas: {
-      // Para POST /api/auth/signup
       UserSignup: {
         type: 'object',
         required: ['first_name', 'last_name', 'email', 'password'],
@@ -35,7 +33,6 @@ const swaggerDefinition = {
           password:   { type: 'string', format: 'password' },
         },
       },
-      // Respuesta de signup
       AuthSignupResponse: {
         type: 'object',
         properties: {
@@ -43,14 +40,12 @@ const swaggerDefinition = {
           email: { type: 'string', format: 'email' },
         },
       },
-      // Respuesta de login
       AuthLoginResponse: {
         type: 'object',
         properties: {
           token: { type: 'string' },
         },
       },
-      // Esquema de mascota
       Pet: {
         type: 'object',
         properties: {
@@ -64,7 +59,6 @@ const swaggerDefinition = {
           status:      { type: 'string', enum: ['available','adopted'] },
         },
       },
-      // Esquema de solicitud de adopción
       AdoptionRequest: {
         type: 'object',
         properties: {
@@ -74,7 +68,6 @@ const swaggerDefinition = {
           status: { type: 'string', enum: ['pending','approved','rejected'] },
         },
       },
-      // Para PUT /api/users/me
       UserUpdate: {
         type: 'object',
         minProperties: 1,
@@ -85,7 +78,6 @@ const swaggerDefinition = {
           age:        { type: 'integer' },
         },
       },
-      // Objeto de error genérico
       ErrorResponse: {
         type: 'object',
         properties: {
@@ -103,7 +95,7 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: ['./src/routes/*.js'], // busca los bloques @openapi en todos los routers
+  apis: ['./src/routes/*.js'], 
 };
 
 export const swaggerSpec = swaggerJSDoc(options);

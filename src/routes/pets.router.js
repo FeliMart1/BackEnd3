@@ -1,4 +1,3 @@
-// src/routes/pets.router.js
 import express from 'express';
 import Pet from '../models/Pet.js';
 import { auth } from '../middlewares/auth.js';
